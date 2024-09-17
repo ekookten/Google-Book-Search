@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { useMutation } from '@apollo/client'; // Import Apollo Client's useMutation
-import { LOGIN_USER } from '../utils/mutations'; // Import the LOGIN_USER mutation
+import { LOGIN_USER } from '../utils/mutation'; // Import the LOGIN_USER mutation
 import Auth from '../utils/auth';
 
 const LoginForm = () => {

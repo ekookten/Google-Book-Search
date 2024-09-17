@@ -1,9 +1,10 @@
 import { Container, Card, Button, Row, Col } from 'react-bootstrap';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_ME } from '../utils/queries'; // Import the GET_ME query
-import { REMOVE_BOOK } from '../utils/mutations'; // Import the REMOVE_BOOK mutation
+import { REMOVE_BOOK } from '../utils/mutation'; // Import the REMOVE_BOOK mutation
 import { removeBookId } from '../utils/localStorage'; // Local storage utility
 import Auth from '../utils/auth'; // Authorization utility
+
 const SavedBooks = () => {
   // Use Apollo Client's useQuery hook to fetch user data
   const { data, loading, error } = useQuery(GET_ME, {
@@ -13,19 +14,24 @@ const SavedBooks = () => {
       },
     },
   });
+
   // Use Apollo Client's useMutation hook to handle book deletion
   const [removeBook] = useMutation(REMOVE_BOOK);
+
   // Check if the data is still loading
   if (loading) {
     return <h2>LOADING...</h2>;
   }
+
   // Handle query errors
   if (error) {
     console.error(error);
     return <h2>Something went wrong while fetching data.</h2>;
   }
+
   // Extract user data from the query result
   const userData = data?.me || { savedBooks: [] };
+
   // Function to handle book deletion
   const handleDeleteBook = async (bookId) => {
     try {
@@ -37,6 +43,7 @@ const SavedBooks = () => {
           },
         },
       });
+
       // Update the local state with the new user data
       if (data) {
         // Remove the book ID from localStorage
@@ -46,6 +53,7 @@ const SavedBooks = () => {
       console.error(err);
     }
   };
+
   return (
     <>
       <div fluid className="text-light bg-dark p-5">
@@ -80,4 +88,5 @@ const SavedBooks = () => {
     </>
   );
 };
+
 export default SavedBooks;
