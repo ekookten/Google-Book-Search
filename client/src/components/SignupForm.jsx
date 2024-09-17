@@ -28,7 +28,7 @@ const SignupForm = () => {
     try {
       const { data } = await addUser({
         variables: { 
-          username: userFormData.username,  // Ensure this matches the mutation definition
+          username: userFormData.username,  
           email: userFormData.email,
           password: userFormData.password
         },
