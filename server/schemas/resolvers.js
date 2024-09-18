@@ -68,13 +68,12 @@ const resolvers = {
         if (context.user) {
           return User.findOneAndUpdate(
             { _id: context.user._id },
-            { $pull: { books: book } },
+            { $pull: { savedBooks: {bookId: book} } },
             { new: true }
           );
         }
         throw AuthenticationError;
       },
-
   },
 };
 
